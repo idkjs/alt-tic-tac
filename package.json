@@ -1,0 +1,26 @@
+{
+  "repository": {},
+  "license": "MIT",
+  "scripts": {
+    "deploy": "brunch build --production",
+    "watch": "brunch watch --stdin",
+    "test": "docker-compose run web nodemon -L -x \"MIX_ENV=dev mix test\" -d . -e ex,exs"
+  },
+  "dependencies": {
+    "babel-loader": "^6.4.1",
+    "css-loader": "^0.28.0",
+    "file-loader": "^0.11.1",
+    "jquery": "^2.2.4",
+    "phoenix": "file:deps/phoenix",
+    "phoenix_html": "file:deps/phoenix_html",
+    "pug": "^2.0.0-beta.12",
+    "pug-loader": "^2.3.0",
+    "semantic-ui-css": "^2.2.10",
+    "vue": "^2.2.6",
+    "vue-loader": "^11.3.4",
+    "vue-template-compiler": "^2.2.6"
+  },
+  "devDependencies": {
+    "webpack": "^2.4.1"
+  }
+}
