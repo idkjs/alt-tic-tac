@@ -17,6 +17,8 @@ defmodule AltTicTac1.Web.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/start", PageController, :start_game
+    get "/join/:id", PageController, :join_game
   end
 
   # Other scopes may use custom stacks.

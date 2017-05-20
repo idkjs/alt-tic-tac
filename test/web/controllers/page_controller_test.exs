@@ -1,8 +1,4 @@
 defmodule AltTicTac1.Web.PageControllerTest do
-  use AltTicTac1.Web.ConnCase
+      use AltTicTac1.Web.ConnCase, async: true
 
-  test "GET /", %{conn: conn} do
-    conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Welcome to Phoenix!"
-  end
 end

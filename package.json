@@ -2,9 +2,8 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "brunch build --production",
-    "watch": "brunch watch --stdin",
-    "test": "docker-compose run web nodemon -L -x \"MIX_ENV=dev mix test\" -d . -e ex,exs"
+    "test": "nodemon -x \"mix test\" -d . -e ex,exs",
+    "start": "mix phx.server"
   },
   "dependencies": {
     "babel-loader": "^6.4.1",

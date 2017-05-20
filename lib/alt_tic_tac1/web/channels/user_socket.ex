@@ -2,7 +2,7 @@ defmodule AltTicTac1.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", AltTicTac1.Web.RoomChannel
+   channel "room:*", AltTicTac1.Web.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
