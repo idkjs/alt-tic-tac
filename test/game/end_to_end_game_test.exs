@@ -21,11 +21,6 @@ defmodule AltTicTac1.EndToEndGameTest do
        {:ok, round_id: round_id, player_1_id: player1["id"], socket1: socket1, socket2: socket2}
     end
 
-    test "Basic connection" do
-      resp = get build_conn(), "/"
-      assert resp.resp_body =~ "zalupa"
-    end
-
     test "Should return an error on any wrong attempt of connection", %{round_id: round_id, player_1_id: player_1_id} do
       {:error, %{reason: "wrong round"}} = socket("player", %{"player_id" => "lol", "player" => "player_1"})
             |> subscribe_and_join(RoomChannel, "room:228")
@@ -37,7 +32,7 @@ defmodule AltTicTac1.EndToEndGameTest do
 
     test "Should make a move", %{socket1: socket1, socket2: socket2, round_id: round_id} do
         @endpoint.subscribe("room:" <> round_id)
-        push socket1, "move", %{"field_coords" => {1,2}, "subfield_coords" => {1,2}}
+        Phoenix.ChannelTest.push socket1, "move", %{"field_coords" => {1,2}, "subfield_coords" => {1,2}}
         assert_broadcast "move", %{"notifications" => [{:move, :player_1, {1, 2}, {1, 2}}]}
     end
 end

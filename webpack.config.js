@@ -1,7 +1,7 @@
 let path = require('path')
 
 module.exports = {
-    entry: "./assets/app.js",
+    entry: ["./assets/Index.bs.js", "./assets/css/index.styl"],
     output: {
         path: path.resolve(__dirname, "./priv/static/js"),
         filename: "app.js",
@@ -14,7 +14,25 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
-            }
+            },
+            {
+                test: /\.styl$/,
+                use: [
+                    {
+                        loader: "style-loader" // creates style nodes from JS strings
+                    },
+                    {
+                        loader: "css-loader" // translates CSS into CommonJS
+                    },
+                    {
+                        loader: "stylus-loader" // compiles Stylus to CSS
+                    }
+                ]
+            },
+            {
+                test: /\.css$/,
+                loader: 'css-loader'
+            },
         ]
     }
 }
