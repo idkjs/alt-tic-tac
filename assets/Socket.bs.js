@@ -2,25 +2,39 @@
 'use strict';
 
 var Phx = require("bucklescript-phx/src/phx.js");
+var Curry = require("bs-platform/lib/js/curry.js");
 var Caml_option = require("bs-platform/lib/js/caml_option.js");
 
 var opts = (
-    function () {
+    function (playerId, player) {
         return {
             params: {
-                token: window.userToken
+               playerId,
+               player
             }
         }
     }
 );
 
-var eta = Phx.initSocket(Caml_option.some(opts), "/socket");
+function initSocket(playerId, player) {
+  var eta = Phx.initSocket(Caml_option.some(Curry._2(opts, playerId, player)), "/socket");
+  return Phx.putOnClose((function (param) {
+                console.log("Socket closed");
+                return /* () */0;
+              }), Phx.connectSocket(undefined, eta));
+}
 
-var socket = Phx.putOnClose((function (param) {
-        console.log("Socket closed");
-        return /* () */0;
-      }), Phx.connectSocket(undefined, eta));
+function joinRoom(socket, id) {
+  var partial_arg = "room:" + id;
+  var eta = (function (eta) {
+        var param = undefined;
+        var param$1 = eta;
+        return Phx.initChannel(partial_arg, param, param$1);
+      })(socket);
+  return Phx.joinChannel(undefined, eta);
+}
 
 exports.opts = opts;
-exports.socket = socket;
+exports.initSocket = initSocket;
+exports.joinRoom = joinRoom;
 /* opts Not a pure module */

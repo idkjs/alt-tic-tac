@@ -19,8 +19,12 @@ defmodule AltTicTac1.Web.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(params, socket) do
+    IO.inspect params
+    socket = socket
+      |> assign(:player_id, params["playerId"])
+      |> assign(:player, params["player"])
+    {:ok, assign(socket, :player_id, params["playerId"])}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

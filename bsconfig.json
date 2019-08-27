@@ -15,7 +15,9 @@
   "namespace": true,
   "bs-dependencies": [
     "reason-react",
-    "bucklescript-phx"
+    "bucklescript-phx",
+    "bs-fetch",
+    "rex-json"
   ],
   "refmt": 3
 }

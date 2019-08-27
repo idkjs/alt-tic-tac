@@ -2,13 +2,16 @@
 open Phx;
 
 let opts = [%raw {|
-    function () {
+    function (playerId, player) {
         return {
             params: {
-                token: window.userToken
+               playerId,
+               player
             }
         }
     }
 |}];
 
-let socket = initSocket("/socket", ~opts = opts) |> connectSocket |> putOnClose(() => Js.log("Socket closed"))
+let initSocket = (playerId, player) =>  initSocket("/socket", ~opts = opts(playerId, player)) |> connectSocket |> putOnClose(() => Js.log("Socket closed"))
+
+let joinRoom = (socket, id) => socket |> initChannel("room:" ++ id) |> joinChannel

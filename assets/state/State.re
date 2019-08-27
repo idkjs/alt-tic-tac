@@ -1,37 +1,48 @@
-type state = {value: int, socket: Phx.Socket.t};
-type action =
-  | Add(int);
+open Phx
 
-let initialState = {value: 0, socket: Socket.socket};
+type player = Player1 | Player2;
+
+let playerToString = player => switch player {
+| Player1 => "player_1"
+| Player2 => "player_2"
+};
+
+type round = {
+  roundId: string,
+  playerId: string,
+  player: player,
+  socket: Socket.t,
+  channel: Phx_push.t
+};
+
+type state = {
+  input: string,
+  round: option(round)
+};
+
+let initState = () => { 
+  {round: None, input: ""}
+};
+
+let initialState = initState()
+
+type action =
+  | JoinRound(string, string, player, Socket.t, Phx_push.t)
+  | ChangeInput(string)
+  | NoEff;
 
 let reducer = (state, action) => {
   switch (action) {
-  | Add(value) =>
-    let newState = {...state,value: state.value + value};
-    newState;
+  | JoinRound(roundId, playerId, player, socket, channel) =>
+    {...state, round: Some({
+      roundId,
+      playerId,
+      player,
+      socket,
+      channel
+    })}
+
+  | ChangeInput(newInput) => {...state, input: newInput}
+  | NoEff => state
   };
-};
-
-type context = (state, action => unit);
-let initialContextValue: context = (initialState, _ => ());
-
-module Provider {
-  let stateContext = React.createContext(initialContextValue);
-  let make = React.Context.provider(stateContext);
-
-  let makeProps = (~value, ~children, ()) => {
-    "value": value,
-    "children": children,
-  };
-}
-
-let use = (): (state, action => unit) => React.useContext(Provider.stateContext);
-
-
-[@react.component]
-let make = (~children) => {
-  <Provider
-    value={React.useReducer(reducer, initialState)}>
-    children
-  </Provider>;
 };

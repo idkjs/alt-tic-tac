@@ -8,3 +8,5 @@ config :alt_tic_tac1, AltTicTac1.Web.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# config :logger, :console, format: "[$level] $message\n"

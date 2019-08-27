@@ -5,11 +5,11 @@ defmodule AltTicTac1.EndToEndGameTest do
     alias AltTicTac1.Web.RoomChannel
 
     setup_all do
-       conn = build_conn |> get("/start")
+       conn = build_conn |> get("/api/start")
        # Creating round and joining via ajax
        round_id = (conn |> response(200) |> Poison.decode!)["id"]
-       player1 = get(build_conn, "/join/" <> round_id) |> response(200) |> Poison.decode!
-       player2 = get(build_conn, "/join/" <> round_id) |> response(200) |> Poison.decode!
+       player1 = get(build_conn, "/api/join/" <> round_id) |> response(200) |> Poison.decode!
+       player2 = get(build_conn, "/api/join/" <> round_id) |> response(200) |> Poison.decode!
 
        # Connectiong with sockets
        {:ok, _, socket1} = socket("player1",  player1)

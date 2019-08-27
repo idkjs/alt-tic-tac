@@ -2,8 +2,8 @@
 'use strict';
 
 var React = require("react");
-var State$ReactHooksTemplate = require("./state/State.bs.js");
-var Counter$ReactHooksTemplate = require("./Counter.bs.js");
+var Main$ReactHooksTemplate = require("./Main.bs.js");
+var StateProvider$ReactHooksTemplate = require("./state/StateProvider.bs.js");
 
 function handleClick(_event) {
   console.log("clicked!14");
@@ -12,8 +12,8 @@ function handleClick(_event) {
 
 function App(Props) {
   Props.message;
-  return React.createElement("div", undefined, React.createElement(State$ReactHooksTemplate.make, {
-                  children: React.createElement(Counter$ReactHooksTemplate.make, { })
+  return React.createElement("div", undefined, React.createElement(StateProvider$ReactHooksTemplate.make, {
+                  children: React.createElement(Main$ReactHooksTemplate.make, { })
                 }));
 }
 

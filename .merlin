@@ -10,6 +10,10 @@ S /home/monyk/Projects/alt-tic-tac/node_modules/reason-react/lib/ocaml
 B /home/monyk/Projects/alt-tic-tac/node_modules/reason-react/lib/ocaml
 S /home/monyk/Projects/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml
 B /home/monyk/Projects/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml
+S /home/monyk/Projects/alt-tic-tac/node_modules/bs-fetch/lib/ocaml
+B /home/monyk/Projects/alt-tic-tac/node_modules/bs-fetch/lib/ocaml
+S /home/monyk/Projects/alt-tic-tac/node_modules/rex-json/lib/ocaml
+B /home/monyk/Projects/alt-tic-tac/node_modules/rex-json/lib/ocaml
 S assets
 B lib/bs/assets
 S assets/state

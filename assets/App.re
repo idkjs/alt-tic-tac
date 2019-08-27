@@ -19,5 +19,5 @@ let handleClick = (_event) => {
 [@react.component]
 let make = (~message) =>
 {
-  <div><State><Counter/></State></div>
+  <div><StateProvider><Main></Main></StateProvider></div>
 }
