@@ -16,8 +16,7 @@
   "bs-dependencies": [
     "reason-react",
     "bucklescript-phx",
-    "bs-fetch",
-    "rex-json"
+    "bs-fetch"
   ],
   "refmt": 3
 }

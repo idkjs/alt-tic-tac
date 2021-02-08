@@ -4,18 +4,20 @@
   "scripts": {
     "test": "nodemon -x \"mix test\" -d . -e ex,exs",
     "start": "mix phx.server",
+    "watch": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
     "build": "webpack"
   },
   "dependencies": {
     "bs-fetch": "^0.6.2",
-    "@glennsl/bs-json": "^1.0.1",
     "bs-platform": "^8.4.2",
     "bucklescript-phx": "^0.1.3",
     "css-loader": "^3.2.0",
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "reason-react": "^0.9.1",
-    "rex-json": "^1.4.0",
     "style-loader": "^1.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
