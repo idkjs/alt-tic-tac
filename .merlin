@@ -1,19 +1,19 @@
 ####{BSB GENERATED: NO EDIT
 B lib/bs
 FLG -open ReactHooksTemplate
-FLG -ppx '/home/monyk/Projects/alt-tic-tac/node_modules/bs-platform/lib/bsppx.exe -bs-jsx 3'
-S /home/monyk/Projects/alt-tic-tac/node_modules/bs-platform/lib/ocaml
-B /home/monyk/Projects/alt-tic-tac/node_modules/bs-platform/lib/ocaml
+FLG -ppx '/Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/bsppx.exe -bs-jsx 3'
+S /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/ocaml
+B /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/ocaml
 FLG -nostdlib -color always
 FLG -w -30-40+6+7+27+32..39+44+45+101
-S /home/monyk/Projects/alt-tic-tac/node_modules/reason-react/lib/ocaml
-B /home/monyk/Projects/alt-tic-tac/node_modules/reason-react/lib/ocaml
-S /home/monyk/Projects/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml
-B /home/monyk/Projects/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml
-S /home/monyk/Projects/alt-tic-tac/node_modules/bs-fetch/lib/ocaml
-B /home/monyk/Projects/alt-tic-tac/node_modules/bs-fetch/lib/ocaml
-S /home/monyk/Projects/alt-tic-tac/node_modules/rex-json/lib/ocaml
-B /home/monyk/Projects/alt-tic-tac/node_modules/rex-json/lib/ocaml
+S /Volumes/SSD/Github/alt-tic-tac/node_modules/reason-react/lib/ocaml
+B /Volumes/SSD/Github/alt-tic-tac/node_modules/reason-react/lib/ocaml
+S /Volumes/SSD/Github/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml
+B /Volumes/SSD/Github/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml
+S /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-fetch/lib/ocaml
+B /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-fetch/lib/ocaml
+S /Volumes/SSD/Github/alt-tic-tac/node_modules/rex-json/lib/ocaml
+B /Volumes/SSD/Github/alt-tic-tac/node_modules/rex-json/lib/ocaml
 S assets
 B lib/bs/assets
 S assets/state
