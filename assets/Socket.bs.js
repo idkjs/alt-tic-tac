@@ -14,6 +14,8 @@ var opts = (function (playerId, player) {
         }
     });
 
+console.log(opts);
+
 function initSocket(playerId, player) {
   return Phx.putOnClose((function (param) {
                 console.log("Socket closed");
@@ -32,4 +34,4 @@ function joinRoom(socket, id) {
 exports.opts = opts;
 exports.initSocket = initSocket;
 exports.joinRoom = joinRoom;
-/* Phx Not a pure module */
+/*  Not a pure module */

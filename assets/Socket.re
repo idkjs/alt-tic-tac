@@ -11,7 +11,7 @@ let opts = [%raw {|
         }
     }
 |}];
-
+Js.log(opts)
 let initSocket = (playerId, player) =>  initSocket("/socket", ~opts = opts(playerId, player)) |> connectSocket |> putOnClose(() => Js.log("Socket closed"))
 
 let joinRoom = (socket, id) => socket |> initChannel("room:" ++ id) |> joinChannel
