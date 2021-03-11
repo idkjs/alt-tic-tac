@@ -1,57 +1,39 @@
-g_std_incl = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/ocaml
-g_pkg_flg = -bs-package-name react-hooks-template -bs-ns ReactHooksTemplate
-src_root_dir = /Volumes/SSD/Github/alt-tic-tac
-bsc = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/bsc.exe
-bsdep = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/bsb_helper.exe
-warnings = -w -30-40+6+7+27+32..39+44+45+101 -warn-error +101
-bsc_flags = -bs-super-errors
-ppx_flags = 
-g_dpkg_incls = 
-g_ns = -bs-ns ReactHooksTemplate
-bsb_dir_group = 0
-g_lib_incls = -I . -I assets/state -I assets -I /Volumes/SSD/Github/alt-tic-tac/node_modules/reason-react/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-fetch/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/rex-json/lib/ocaml
-rule build_ast_from_re
-  command = $bsc  $warnings -color always -bs-jsx 3 $bsc_flags -o $out -bs-syntax-only -bs-binary-ast $in
-  description = [34mBuilding[39m [2m${out}[22m
-build  assets/App.reast : build_ast_from_re $src_root_dir/assets/App.re
-rule build_deps
-  command = $bsdep -hash 35ef4e054a7ad4baaa9df56556a88675 $g_ns -g $bsb_dir_group $in
+rescript = 1
+g_finger := /Volumes/SSD/Github/alt-tic-tac/node_modules/reason-react/lib/ocaml/install.stamp
+g_finger := /Volumes/SSD/Github/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml/install.stamp
+g_finger := /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-fetch/lib/ocaml/install.stamp
+g_finger := /Volumes/SSD/Github/alt-tic-tac/node_modules/rex-json/lib/ocaml/install.stamp
+rule astj
+  command = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/darwin/bsc.exe  -warn-error +101 -bs-v 9.0.1 -bs-jsx 3 -bs-super-errors -absname -bs-ast -o $out $i
+o assets/App.ast : astj ../../assets/App.re
+rule deps
+  command = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/darwin/bsb_helper.exe -hash f6151fe4a5a300ae1ef9cc58e86a2e07 -bs-ns ReactHooksTemplate $in
   restat = 1
-  description = [34mBuilding[39m [2m${out}[22m
-build  assets/App.d : build_deps assets/App.reast
-rule ml_cmj_cmi
-  command = $bsc -nostdlib $g_pkg_flg -color always -bs-suffix $g_lib_incls -I $g_std_incl $warnings $bsc_flags -o $out $in
-  dyndep = $in_e.d
+o assets/App.d : deps assets/App.ast
+rule mij
+  command = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/darwin/bsc.exe -bs-ns ReactHooksTemplate -I . -I assets/css -I assets/state -I assets -I /Volumes/SSD/Github/alt-tic-tac/node_modules/reason-react/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-fetch/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/rex-json/lib/ocaml -bs-super-errors  -warn-error +101 -bs-package-name react-hooks-template -bs-package-output commonjs:$in_d:.bs.js -bs-v $g_finger $i
+  dyndep = 1
   restat = 1
-  description = [34mBuilding[39m [2m${out}[22m
-build  assets/App-ReactHooksTemplate.cmj |  assets/App-ReactHooksTemplate.cmi $src_root_dir/assets/App.bs.js : ml_cmj_cmi assets/App.reast ||  assets/App.d
-  g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets
-build  assets/Main.reast : build_ast_from_re $src_root_dir/assets/Main.re
-build  assets/Main.d : build_deps assets/Main.reast
-build  assets/Main-ReactHooksTemplate.cmj |  assets/Main-ReactHooksTemplate.cmi $src_root_dir/assets/Main.bs.js : ml_cmj_cmi assets/Main.reast ||  assets/Main.d
-  g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets
-build  assets/Index.reast : build_ast_from_re $src_root_dir/assets/Index.re
-build  assets/Index.d : build_deps assets/Index.reast
-build  assets/Index-ReactHooksTemplate.cmj |  assets/Index-ReactHooksTemplate.cmi $src_root_dir/assets/Index.bs.js : ml_cmj_cmi assets/Index.reast ||  assets/Index.d
-  g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets
-build  assets/Socket.reast : build_ast_from_re $src_root_dir/assets/Socket.re
-build  assets/Socket.d : build_deps assets/Socket.reast
-build  assets/Socket-ReactHooksTemplate.cmj |  assets/Socket-ReactHooksTemplate.cmi $src_root_dir/assets/Socket.bs.js : ml_cmj_cmi assets/Socket.reast ||  assets/Socket.d
-  g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets
-build  assets/state/Round.reast : build_ast_from_re $src_root_dir/assets/state/Round.re
-build  assets/state/Round.d : build_deps assets/state/Round.reast
-build  assets/state/Round-ReactHooksTemplate.cmj |  assets/state/Round-ReactHooksTemplate.cmi $src_root_dir/assets/state/Round.bs.js : ml_cmj_cmi assets/state/Round.reast ||  assets/state/Round.d
-  g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets/state
-build  assets/state/State.reast : build_ast_from_re $src_root_dir/assets/state/State.re
-build  assets/state/State.d : build_deps assets/state/State.reast
-build  assets/state/State-ReactHooksTemplate.cmj |  assets/state/State-ReactHooksTemplate.cmi $src_root_dir/assets/state/State.bs.js : ml_cmj_cmi assets/state/State.reast ||  assets/state/State.d
-  g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets/state
-build  assets/state/StateProvider.reast : build_ast_from_re $src_root_dir/assets/state/StateProvider.re
-build  assets/state/StateProvider.d : build_deps assets/state/StateProvider.reast
-build  assets/state/StateProvider-ReactHooksTemplate.cmj |  assets/state/StateProvider-ReactHooksTemplate.cmi $src_root_dir/assets/state/StateProvider.bs.js : ml_cmj_cmi assets/state/StateProvider.reast ||  assets/state/StateProvider.d
-  g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets/state
+o assets/App-ReactHooksTemplate.cmj assets/App-ReactHooksTemplate.cmi ../../assets/App.bs.js : mij assets/App.ast
+o assets/Main.ast : astj ../../assets/Main.re
+o assets/Main.d : deps assets/Main.ast
+o assets/Main-ReactHooksTemplate.cmj assets/Main-ReactHooksTemplate.cmi ../../assets/Main.bs.js : mij assets/Main.ast
+o assets/Index.ast : astj ../../assets/Index.re
+o assets/Index.d : deps assets/Index.ast
+o assets/Index-ReactHooksTemplate.cmj assets/Index-ReactHooksTemplate.cmi ../../assets/Index.bs.js : mij assets/Index.ast
+o assets/Socket.ast : astj ../../assets/Socket.re
+o assets/Socket.d : deps assets/Socket.ast
+o assets/Socket-ReactHooksTemplate.cmj assets/Socket-ReactHooksTemplate.cmi ../../assets/Socket.bs.js : mij assets/Socket.ast
+o assets/state/Round.ast : astj ../../assets/state/Round.re
+o assets/state/Round.d : deps assets/state/Round.ast
+o assets/state/Round-ReactHooksTemplate.cmj assets/state/Round-ReactHooksTemplate.cmi ../../assets/state/Round.bs.js : mij assets/state/Round.ast
+o assets/state/State.ast : astj ../../assets/state/State.re
+o assets/state/State.d : deps assets/state/State.ast
+o assets/state/State-ReactHooksTemplate.cmj assets/state/State-ReactHooksTemplate.cmi ../../assets/state/State.bs.js : mij assets/state/State.ast
+o assets/state/StateProvider.ast : astj ../../assets/state/StateProvider.re
+o assets/state/StateProvider.d : deps assets/state/StateProvider.ast
+o assets/state/StateProvider-ReactHooksTemplate.cmj assets/state/StateProvider-ReactHooksTemplate.cmi ../../assets/state/StateProvider.bs.js : mij assets/state/StateProvider.ast
 rule build_package
-  command = $bsc -w -49 -color always -no-alias-deps  $in
+  command = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/darwin/bsc.exe -w -49 -color always -no-alias-deps  $i
   restat = 1
-  description = [34mBuilding[39m [2m${out}[22m
-build  ReactHooksTemplate.cmi : build_package ReactHooksTemplate.mlmap
+o ReactHooksTemplate.cmi : build_package ReactHooksTemplate.mlmap
