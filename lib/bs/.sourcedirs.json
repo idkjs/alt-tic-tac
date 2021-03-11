@@ -1,1 +1,1 @@
-{ "dirs" : [ "assets" , "assets/css" , "assets/state" ] , "generated" : [] }
+{ "dirs" : [ "assets" , "assets/state" , "assets/css" ] , "pkgs" : [ [ "bucklescript-phx" , "/Volumes/SSD/Github/alt-tic-tac/node_modules/bucklescript-phx" ] , [ "bs-platform" , "/Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform" ] , [ "bs-fetch" , "/Volumes/SSD/Github/alt-tic-tac/node_modules/bs-fetch" ] , [ "reason-react" , "/Volumes/SSD/Github/alt-tic-tac/node_modules/reason-react" ] , [ "rex-json" , "/Volumes/SSD/Github/alt-tic-tac/node_modules/rex-json" ] ] , "generated" : [] }

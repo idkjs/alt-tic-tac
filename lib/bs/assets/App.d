@@ -1,1 +1,1 @@
-assets/App-ReactHooksTemplate.cmj : ReactHooksTemplate.cmi assets/state/StateProvider-ReactHooksTemplate.cmj assets/state/StateProvider-ReactHooksTemplate.cmi
+assets/App-ReactHooksTemplate.cmj : ReactHooksTemplate.cmi assets/Main-ReactHooksTemplate.cmj assets/Main-ReactHooksTemplate.cmi assets/state/StateProvider-ReactHooksTemplate.cmj assets/state/StateProvider-ReactHooksTemplate.cmi

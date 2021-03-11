@@ -1,23 +1,25 @@
 {
-  "name": "react-hooks-template",
-  "reason": {
-    "react-jsx": 3
-  },
-  "sources": {
-    "dir" : "assets",
-    "subdirs" : true
-  },
-  "package-specs": [{
-    "module": "commonjs",
-    "in-source": true
-  }],
-  "suffix": ".bs.js",
-  "namespace": true,
-  "bs-dependencies": [
-    "reason-react",
-    "bucklescript-phx",
-    "bs-fetch",
-    "rex-json"
-  ],
-  "refmt": 3
+    "name": "react-hooks-template",
+    "reason": {
+        "react-jsx": 3
+    },
+    "sources": {
+        "dir": "assets",
+        "subdirs": true
+    },
+
+    "bsc-flags": [ "-bs-super-errors" ],
+
+    "bs-dependencies": [ "reason-react", "bucklescript-phx", "bs-fetch", "rex-json" ],
+
+    "package-specs": {
+        "module": "commonjs",
+        "in-source": true
+    },
+    "suffix": ".bs.js",
+    "warnings": {
+        "error": "+101"
+    },
+    "namespace": true,
+    "refmt": 3
 }

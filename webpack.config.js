@@ -8,6 +8,7 @@ module.exports = {
         devtoolModuleFilenameTemplate: '[absolute-resource-path]',
         devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
     },
+    mode: 'development',
     devtool: 'source-map',
     module: {
         rules: [

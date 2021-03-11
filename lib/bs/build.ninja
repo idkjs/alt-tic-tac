@@ -1,60 +1,57 @@
+g_std_incl = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/ocaml
 g_pkg_flg = -bs-package-name react-hooks-template -bs-ns ReactHooksTemplate
-src_root_dir = /home/monyk/Projects/alt-tic-tac
-bsc = /home/monyk/Projects/alt-tic-tac/node_modules/bs-platform/lib/bsc.exe
-bsdep = /home/monyk/Projects/alt-tic-tac/node_modules/bs-platform/lib/bsb_helper.exe
-warnings = -w -30-40+6+7+27+32..39+44+45+101
-bsc_flags = -bs-suffix -nostdlib -I '/home/monyk/Projects/alt-tic-tac/node_modules/bs-platform/lib/ocaml' -color always
+src_root_dir = /Volumes/SSD/Github/alt-tic-tac
+bsc = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/bsc.exe
+bsdep = /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-platform/lib/bsb_helper.exe
+warnings = -w -30-40+6+7+27+32..39+44+45+101 -warn-error +101
+bsc_flags = -bs-super-errors
 ppx_flags = 
-g_pkg_incls = -I /home/monyk/Projects/alt-tic-tac/node_modules/reason-react/lib/ocaml -I /home/monyk/Projects/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml -I /home/monyk/Projects/alt-tic-tac/node_modules/bs-fetch/lib/ocaml -I /home/monyk/Projects/alt-tic-tac/node_modules/rex-json/lib/ocaml
-bs_package_dev_includes = 
+g_dpkg_incls = 
 g_ns = -bs-ns ReactHooksTemplate
 bsb_dir_group = 0
-refmt = /home/monyk/Projects/alt-tic-tac/node_modules/bs-platform/lib/refmt.exe
-reason_react_jsx = -bs-jsx 3
-refmt_flags = --print binary
-g_lib_incls = -I . -I assets/state -I assets
-rule build_ast_and_module_sets_from_re
-  command = $bsc -pp "$refmt $refmt_flags" $reason_react_jsx  $ppx_flags $warnings $bsc_flags -c -o $out -bs-syntax-only -bs-binary-ast -impl $in
+g_lib_incls = -I . -I assets/state -I assets -I /Volumes/SSD/Github/alt-tic-tac/node_modules/reason-react/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/bucklescript-phx/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/bs-fetch/lib/ocaml -I /Volumes/SSD/Github/alt-tic-tac/node_modules/rex-json/lib/ocaml
+rule build_ast_from_re
+  command = $bsc  $warnings -color always -bs-jsx 3 $bsc_flags -o $out -bs-syntax-only -bs-binary-ast $in
   description = [34mBuilding[39m [2m${out}[22m
-build assets/App.mlast : build_ast_and_module_sets_from_re $src_root_dir/assets/App.re
+build  assets/App.reast : build_ast_from_re $src_root_dir/assets/App.re
 rule build_deps
-  command = $bsdep $g_ns -g $bsb_dir_group $in
+  command = $bsdep -hash 35ef4e054a7ad4baaa9df56556a88675 $g_ns -g $bsb_dir_group $in
   restat = 1
   description = [34mBuilding[39m [2m${out}[22m
-build assets/App.d : build_deps assets/App.mlast
-rule re_cmj_cmi
-  command = $bsc $g_pkg_flg  -bs-re-out -bs-super-errors $g_pkg_incls $g_lib_incls $bsc_extra_includes $warnings $bsc_flags $gentypeconfig -o $out -c  $in $postbuild
+build  assets/App.d : build_deps assets/App.reast
+rule ml_cmj_cmi
+  command = $bsc -nostdlib $g_pkg_flg -color always -bs-suffix $g_lib_incls -I $g_std_incl $warnings $bsc_flags -o $out $in
   dyndep = $in_e.d
   restat = 1
   description = [34mBuilding[39m [2m${out}[22m
-build assets/App-ReactHooksTemplate.cmj |  $src_root_dir/assets/App.bs.js assets/App-ReactHooksTemplate.cmi : re_cmj_cmi assets/App.mlast ||  assets/App.d
+build  assets/App-ReactHooksTemplate.cmj |  assets/App-ReactHooksTemplate.cmi $src_root_dir/assets/App.bs.js : ml_cmj_cmi assets/App.reast ||  assets/App.d
   g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets
-build assets/Main.mlast : build_ast_and_module_sets_from_re $src_root_dir/assets/Main.re
-build assets/Main.d : build_deps assets/Main.mlast
-build assets/Main-ReactHooksTemplate.cmj |  $src_root_dir/assets/Main.bs.js assets/Main-ReactHooksTemplate.cmi : re_cmj_cmi assets/Main.mlast ||  assets/Main.d
+build  assets/Main.reast : build_ast_from_re $src_root_dir/assets/Main.re
+build  assets/Main.d : build_deps assets/Main.reast
+build  assets/Main-ReactHooksTemplate.cmj |  assets/Main-ReactHooksTemplate.cmi $src_root_dir/assets/Main.bs.js : ml_cmj_cmi assets/Main.reast ||  assets/Main.d
   g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets
-build assets/Index.mlast : build_ast_and_module_sets_from_re $src_root_dir/assets/Index.re
-build assets/Index.d : build_deps assets/Index.mlast
-build assets/Index-ReactHooksTemplate.cmj |  $src_root_dir/assets/Index.bs.js assets/Index-ReactHooksTemplate.cmi : re_cmj_cmi assets/Index.mlast ||  assets/Index.d
+build  assets/Index.reast : build_ast_from_re $src_root_dir/assets/Index.re
+build  assets/Index.d : build_deps assets/Index.reast
+build  assets/Index-ReactHooksTemplate.cmj |  assets/Index-ReactHooksTemplate.cmi $src_root_dir/assets/Index.bs.js : ml_cmj_cmi assets/Index.reast ||  assets/Index.d
   g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets
-build assets/Socket.mlast : build_ast_and_module_sets_from_re $src_root_dir/assets/Socket.re
-build assets/Socket.d : build_deps assets/Socket.mlast
-build assets/Socket-ReactHooksTemplate.cmj |  $src_root_dir/assets/Socket.bs.js assets/Socket-ReactHooksTemplate.cmi : re_cmj_cmi assets/Socket.mlast ||  assets/Socket.d
+build  assets/Socket.reast : build_ast_from_re $src_root_dir/assets/Socket.re
+build  assets/Socket.d : build_deps assets/Socket.reast
+build  assets/Socket-ReactHooksTemplate.cmj |  assets/Socket-ReactHooksTemplate.cmi $src_root_dir/assets/Socket.bs.js : ml_cmj_cmi assets/Socket.reast ||  assets/Socket.d
   g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets
-build assets/state/Round.mlast : build_ast_and_module_sets_from_re $src_root_dir/assets/state/Round.re
-build assets/state/Round.d : build_deps assets/state/Round.mlast
-build assets/state/Round-ReactHooksTemplate.cmj |  $src_root_dir/assets/state/Round.bs.js assets/state/Round-ReactHooksTemplate.cmi : re_cmj_cmi assets/state/Round.mlast ||  assets/state/Round.d
+build  assets/state/Round.reast : build_ast_from_re $src_root_dir/assets/state/Round.re
+build  assets/state/Round.d : build_deps assets/state/Round.reast
+build  assets/state/Round-ReactHooksTemplate.cmj |  assets/state/Round-ReactHooksTemplate.cmi $src_root_dir/assets/state/Round.bs.js : ml_cmj_cmi assets/state/Round.reast ||  assets/state/Round.d
   g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets/state
-build assets/state/State.mlast : build_ast_and_module_sets_from_re $src_root_dir/assets/state/State.re
-build assets/state/State.d : build_deps assets/state/State.mlast
-build assets/state/State-ReactHooksTemplate.cmj |  $src_root_dir/assets/state/State.bs.js assets/state/State-ReactHooksTemplate.cmi : re_cmj_cmi assets/state/State.mlast ||  assets/state/State.d
+build  assets/state/State.reast : build_ast_from_re $src_root_dir/assets/state/State.re
+build  assets/state/State.d : build_deps assets/state/State.reast
+build  assets/state/State-ReactHooksTemplate.cmj |  assets/state/State-ReactHooksTemplate.cmi $src_root_dir/assets/state/State.bs.js : ml_cmj_cmi assets/state/State.reast ||  assets/state/State.d
   g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets/state
-build assets/state/StateProvider.mlast : build_ast_and_module_sets_from_re $src_root_dir/assets/state/StateProvider.re
-build assets/state/StateProvider.d : build_deps assets/state/StateProvider.mlast
-build assets/state/StateProvider-ReactHooksTemplate.cmj |  $src_root_dir/assets/state/StateProvider.bs.js assets/state/StateProvider-ReactHooksTemplate.cmi : re_cmj_cmi assets/state/StateProvider.mlast ||  assets/state/StateProvider.d
+build  assets/state/StateProvider.reast : build_ast_from_re $src_root_dir/assets/state/StateProvider.re
+build  assets/state/StateProvider.d : build_deps assets/state/StateProvider.reast
+build  assets/state/StateProvider-ReactHooksTemplate.cmj |  assets/state/StateProvider-ReactHooksTemplate.cmi $src_root_dir/assets/state/StateProvider.bs.js : ml_cmj_cmi assets/state/StateProvider.reast ||  assets/state/StateProvider.d
   g_pkg_flg = $g_pkg_flg  -bs-package-output commonjs:assets/state
 rule build_package
-  command = $bsc -w -49 -no-alias-deps -bs-cmi-only -c $in
+  command = $bsc -w -49 -color always -no-alias-deps  $in
   restat = 1
   description = [34mBuilding[39m [2m${out}[22m
-build ReactHooksTemplate.cmi : build_package ReactHooksTemplate.mlmap
+build  ReactHooksTemplate.cmi : build_package ReactHooksTemplate.mlmap
